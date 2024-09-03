@@ -19,12 +19,12 @@ return require('packer').startup(function(use)
     })
 	use('ellisonleao/gruvbox.nvim')
 	use('Mofiqul/dracula.nvim')
-    use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
+    use('nvim-treesitter/nvim-treesitter')
     use('mbbill/undotree')
 	use('mhartington/formatter.nvim')
     use('tpope/vim-fugitive')
 	use('tpope/vim-rhubarb')
-    use('nathom/filetype.nvim')
+    -- use('nathom/filetype.nvim')
     use('dstein64/vim-startuptime')
     use {
         'VonHeikemen/lsp-zero.nvim',
@@ -63,5 +63,11 @@ return require('packer').startup(function(use)
     }
     use {
         'lewis6991/gitsigns.nvim',
+    }
+    use {
+        'goolord/alpha-nvim',
+        config = function ()
+            require'alpha'.setup(require'alpha.themes.dashboard'.config)
+        end
     }
 end)
