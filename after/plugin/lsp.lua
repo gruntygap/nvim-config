@@ -2,7 +2,7 @@ local lsp = require('lsp-zero')
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-  ensure_installed = {'tsserver', 'eslint', 'lua_ls', 'yamlls'},
+  ensure_installed = {'ts_ls', 'eslint', 'lua_ls', 'yamlls'},
   handlers = {
     lsp.default_setup,
     lua_ls = function()
