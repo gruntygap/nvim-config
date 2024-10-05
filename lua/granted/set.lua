@@ -10,8 +10,8 @@ vim.opt.tabstop = 4
 vim.opt.softtabstop = 0
 vim.opt.shiftwidth = 4
 -- vim.opt.smarttab = true
-vim.opt.wrap = false
 -- vim.opt.smartindent = true
+vim.opt.wrap = false
 
 vim.opt.swapfile = false
 vim.opt.backup = false
@@ -31,3 +31,6 @@ vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = '80'
 vim.cmd[[colorscheme rose-pine]]
+
+-- corrects weird changes when :w but you didn't change anything
+vim.opt.fixeol = false
