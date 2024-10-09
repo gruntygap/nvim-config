@@ -1,40 +1,36 @@
-local lsp = require('lsp-zero')
 
-require('mason').setup({})
-require('mason-lspconfig').setup({
-  ensure_installed = {'ts_ls', 'eslint', 'lua_ls', 'yamlls'},
-  handlers = {
-    lsp.default_setup,
-    lua_ls = function()
-      local lua_opts = lsp.nvim_lua_ls()
-      require('lspconfig').lua_ls.setup(lua_opts)
-    end,
-  }
-})
-
-lsp.preset('recommended')
-
+-- COMPLETION SETUP
 local cmp = require('cmp')
+local cmp_action = require('lsp-zero').cmp_action()
+local cmp_format = require('lsp-zero').cmp_format({details = true})
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
-local cmp_mappings = lsp.defaults.cmp_mappings({
-	['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-	['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-	['<C-y>'] = cmp.mapping.confirm({ select = true }),
-	['<C-Space>'] = cmp.mapping.complete(),
+cmp.setup({
+    sources = {
+        {name = 'nvim_lsp'},
+        {name = 'buffer'}, -- cmp-buffer
+        {name = 'luasnip'} -- cmp_luasnip
+    },
+    -- optional: show source name
+    formatting = cmp_format,
+    snippet = {
+        expand = function(args)
+            require('luasnip').lsp_expand(args.body)
+        end,
+    },
+    mapping = cmp.mapping.preset.insert({
+        ['<C-f>'] = cmp_action.luasnip_jump_forward(),
+        ['<C-b>'] = cmp_action.luasnip_jump_backward(),
+        ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+        ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+        ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+        ['<C-Space>'] = cmp.mapping.complete(),
+    }),
 })
 
+-- LSP ZERO, MY HERO
+local lsp_zero = require('lsp-zero')
 
-lsp.set_preferences({
-    suggest_lsp_servers = false,
-    sign_icons = {
-        error = 'E',
-        warn = 'W',
-        hint = 'H',
-        info = 'I'
-    }
-})
-
-lsp.on_attach(function(client, bufnr)
+local lsp_attach = function(client, bufnr)
 	local opts = { buffer = bufnr, remap = false }
 
 	vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition() end, opts)
@@ -49,14 +45,33 @@ lsp.on_attach(function(client, bufnr)
 	vim.keymap.set('n', '<leader>vrn', function() vim.lsp.buf.rename() end, opts)
 
 	vim.keymap.set('i', '<C-h>', function() vim.lsp.buf.signature_help() end, opts)
+end
 
-end)
+lsp_zero.extend_lspconfig({
+    capabilities = require('cmp_nvim_lsp').default_capabilities(),
+    lsp_attach = lsp_attach,
+    float_border = 'rounded',
+    sign_text = true,
+})
 
--- Ensure that nvim lsp recognizes the vim global object
--- require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
+-- MASON: LSP SERVERS
+require('mason').setup({})
+require('mason-lspconfig').setup({
+  ensure_installed = {'ts_ls', 'eslint', 'lua_ls', 'yamlls'},
+  handlers = {
+    function(server_name)
+        require('lspconfig')[server_name].setup({})
+    end,
+    lua_ls = function()
+      -- Ensure that nvim lsp recognizes the vim global object
+      local lua_opts = lsp_zero.nvim_lua_ls()
+      require('lspconfig').lua_ls.setup(lua_opts)
+    end,
+  }
+})
 
-lsp.setup()
-
+-- not sure what this does
 vim.diagnostic.config({
     virtual_text = true
 })
+
