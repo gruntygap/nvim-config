@@ -14,7 +14,7 @@ vim.keymap.set('n', '<leader>w', vim.cmd.close, { silent = true }) -- close wind
 
 -- Tabpages
 vim.keymap.set('n', '<leader>tn', vim.cmd.tabnew) -- new tab
-vim.keymap.set('n', '<C-S-PageDown>', vim.cmd.tabprevious, { silent = true }) -- previous tab
-vim.keymap.set('n', '<C-S-PageUp>', vim.cmd.tabnext, { silent = true }) -- next tab
+-- vim.keymap.set('n', '<C-S-PageDown>', vim.cmd.tabprevious, { silent = true }) -- previous tab
+-- vim.keymap.set('n', '<C-S-PageUp>', vim.cmd.tabnext, { silent = true }) -- next tab
 --  not very helpful, use gt and gT
 --  Use `:tc(d) {path}` to change directories within vim tabs

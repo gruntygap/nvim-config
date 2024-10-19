@@ -53,9 +53,10 @@ return require('packer').startup(function(use)
         "iamcco/markdown-preview.nvim",
         run = function() vim.fn["mkdp#util#install"]() end,
     })
-    use {
-        'github/copilot.vim'
-    }
+    -- re-enable if I ever intend to use again
+    -- use {
+    --     'github/copilot.vim'
+    -- }
     use {
         'nvim-lualine/lualine.nvim',
         requires = { 'nvim-tree/nvim-web-devicons', opt = true }

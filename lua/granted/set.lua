@@ -2,6 +2,9 @@ vim.g.mapleader = ' '
 
 vim.opt.guicursor = ''
 
+-- Buffer shiz
+vim.opt.bufhidden = 'hide'
+
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
@@ -35,4 +38,5 @@ vim.opt.colorcolumn = '80'
 vim.cmd[[colorscheme rose-pine]]
 
 -- corrects weird changes when :w but you didn't change anything
+-- literally just talking about weird end of line characters
 vim.opt.fixeol = false
