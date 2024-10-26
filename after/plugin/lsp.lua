@@ -124,6 +124,8 @@ require('mason-lspconfig').setup({
 
 -- not sure what this does
 vim.diagnostic.config({
-    virtual_text = true
+    virtual_text = {
+      source = true
+  }
 })
 
