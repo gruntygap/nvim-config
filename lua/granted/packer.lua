@@ -1,3 +1,6 @@
+-- TODO: Switch to lazy.nvim
+-- https://lazy.folke.io/
+
 -- This file can be loaded by calling `lua require('plugins')` from your init.vim
 vim.loader.enable();
 -- Only required if you have packer configured as `opt`
@@ -84,5 +87,8 @@ return require('packer').startup(function(use)
             }
             vim.g.vimwiki_global_ext = 0
         end
+    }
+    use {
+      "folke/zen-mode.nvim"
     }
 end)
