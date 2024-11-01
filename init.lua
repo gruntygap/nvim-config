@@ -1,1 +1,1 @@
-require('granted')
+require('config.lazy')
