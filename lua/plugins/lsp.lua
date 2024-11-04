@@ -2,7 +2,7 @@ return {
   -- LSP Server Management Application
   {
     'williamboman/mason.nvim',
-    lazy = true,
+    lazy = false,
     opts = {}
   },
   -- LSP
