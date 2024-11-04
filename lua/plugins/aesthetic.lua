@@ -1,6 +1,10 @@
 return {
   { 'goolord/alpha-nvim',
-    opts = require'alpha.themes.dashboard'.config
-  },
-  { 'folke/zen-mode.nvim' }
+    config = function ()
+            require'alpha'.setup(require'alpha.themes.dashboard'.config)
+        end
+    },
+    {
+      "folke/zen-mode.nvim"
+    }
 }

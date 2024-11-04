@@ -1,8 +1,19 @@
 return {
-  { "ellisonleao/gruvbox.nvim" },
-  { "rose-pine/neovim", name = 'rose-pine' },
-  { "Mofiqul/dracula.nvim" },
-  { "ilof2/posterpole.nvim",
+  {
+    "ellisonleao/gruvbox.nvim",
+    lazy = true
+  },
+  {
+    "rose-pine/neovim",
+    name = 'rose-pine',
+    lazy = true
+  },
+  {
+    "Mofiqul/dracula.nvim",
+    lazy = true
+  },
+  {
+    "ilof2/posterpole.nvim",
     priority=1000,
     config = function ()
       require("posterpole").setup({})

@@ -29,7 +29,6 @@ return {
       builtin.grep_string({ search = vim.fn.input("Grep > ") });
     end)
 
-    -- Vanity
     vim.keymap.set('n', '<leader>ft', builtin.colorscheme, {})
   end
 }
