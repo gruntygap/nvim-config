@@ -18,6 +18,7 @@ return {
       -- Fidget
       'j-hui/fidget.nvim',
     },
+    -- init is called at startup
     init = function()
       vim.opt.signcolumn = 'yes'
     end,
