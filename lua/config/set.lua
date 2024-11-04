@@ -36,8 +36,6 @@ vim.opt.isfname:append('@-@')
 vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = '80'
-vim.cmd[[colorscheme rose-pine]]
 
--- corrects weird changes when :w but you didn't change anything
--- literally just talking about weird end of line characters
+-- corrects weird changes when :w but you didn't change anything (EOL chars)
 vim.opt.fixeol = false
