@@ -22,7 +22,6 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 require('config.set')
 require('config.remap')
--- TODO: can ^ just be 'set'?
 
 -- Setup lazy.nvim
 require("lazy").setup({
@@ -35,4 +34,5 @@ require("lazy").setup({
   install = { colorscheme = { "habamax" } },
   -- automatically check for plugin updates
   checker = { enabled = true },
+  change_detection = { notify = false }
 })
