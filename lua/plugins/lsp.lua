@@ -28,6 +28,8 @@ return {
 
       lsp_defaults.capabilities = vim.tbl_deep_extend(
         'force',
+        {},
+        vim.lsp.protocol.make_client_capabilities(),
         lsp_defaults.capabilities,
         require('cmp_nvim_lsp').default_capabilities()
       )
@@ -168,10 +170,10 @@ return {
           require('lspconfig').jsonls.setup(opts)
         end,
         lua_ls = function()
-          local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+          local lsp_defaults = require('lspconfig').util.default_config
           -- Ensure that nvim lsp recognizes the vim global object
           require('lspconfig').lua_ls.setup({
-            capabilities = lsp_capabilities,
+            capabilities = lsp_defaults.capabilities,
             settings = {
               Lua = {
                 runtime = {
