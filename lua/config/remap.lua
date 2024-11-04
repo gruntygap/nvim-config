@@ -18,3 +18,8 @@ vim.keymap.set('n', '<leader>tn', vim.cmd.tabnew) -- new tab
 -- vim.keymap.set('n', '<C-S-PageUp>', vim.cmd.tabnext, { silent = true }) -- next tab
 --  not very helpful, use gt and gT
 --  Use `:tc(d) {path}` to change directories within vim tabs
+
+vim.g.netrw_browse_split = 0
+vim.g.netrw_banner = 0
+vim.g.netrw_winsize = 25
+
