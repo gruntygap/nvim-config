@@ -4,14 +4,35 @@ return {
   dependencies = { "nvim-tree/nvim-web-devicons" },
   config = function()
     local actions = require('fzf-lua.actions')
+    local toggled = false
+    local dotgit = function (_, opts)
+      local flag = '--exclude .git'
+
+      toggled = not toggled
+      actions.toggle_flag(_, vim.tbl_extend("force", opts, { toggle_flag = flag }))
+    end
+    local dotGitHeader = function ()
+      if toggled then
+        return "exclude .git"
+      else
+        return "include .git"
+      end
+    end
     require('fzf-lua').setup({
       grep = {
         actions = {
           -- this action toggles between 'grep' and 'live_grep'
-          ["ctrl-g"] = { actions.grep_lgrep },
+          ["ctrl-r"] = { actions.grep_lgrep },
           -- uncomment to enable '.gitignore' toggle for grep
-          ["ctrl-r"] = { actions.toggle_ignore },
+          ["ctrl-g"] = { actions.toggle_ignore },
           -- uncomment to enable '.gitignore' toggle for grep
+          ["ctrl-h"] = { actions.toggle_hidden }
+        }
+      },
+      files = {
+        actions = {
+          ["ctrl-g"] = { actions.toggle_ignore },
+          ["ctrl-t"] = { fn = dotgit, header = dotGitHeader },
           ["ctrl-h"] = { actions.toggle_hidden }
         }
       }
