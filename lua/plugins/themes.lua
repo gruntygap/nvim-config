@@ -13,15 +13,31 @@ return {
     lazy = true
   },
   {
+    'franbach/miramare',
+    lazy = true
+  },
+  {
+    'sainnhe/everforest',
+    lazy = true
+   },
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    -- priority = 1000,
+    -- config = function ()
+    --   require("catppuccin").setup({})
+    --   vim.cmd("colorscheme catppuccin")
+    -- end
+  },
+  {
+    'f4z3r/gruvbox-material.nvim',
+    name = 'gruvbox-material',
+    lazy = false,
+    priority = 1000,
+    opts = {},
+  },
+  {
     "ilof2/posterpole.nvim",
-    priority=1000,
-    config = function ()
-      require("posterpole").setup({})
-      vim.cmd("colorscheme posterpole")
-
-      -- if you need colorscheme without termguicolors support
-      -- This variant set termguicolors to false, be aware of using it
-      -- vim.cmd("colorscheme posterpole-term")
-    end
+    lazy = true
   }
 }

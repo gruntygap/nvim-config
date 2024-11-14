@@ -38,6 +38,6 @@ return {
     -- look at keymaps
     vim.keymap.set('n', '<leader>sk', fzf.keymaps)
     -- history of search
-    vim.keymap.set('n', '<leader>sh', fzf.search_history)
+    vim.keymap.set('n', '<leader>shh', fzf.search_history)
   end
 }
