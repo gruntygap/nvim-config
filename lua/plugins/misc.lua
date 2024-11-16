@@ -7,9 +7,7 @@ return {
   },
   {
     'iamcco/markdown-preview.nvim',
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    ft = { "markdown" },
-    build = function() vim.fn["mkdp#util#install"]() end,
+    config = function() vim.fn["mkdp#util#install"]() end,
   },
   "eandrju/cellular-automaton.nvim",
   'tpope/vim-commentary' -- gc? .. comments baby
