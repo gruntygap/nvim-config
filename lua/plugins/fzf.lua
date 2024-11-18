@@ -41,20 +41,20 @@ return {
 
     vim.keymap.set('n', '<leader>ss', fzf.grep) -- search
     -- Live grep whole project
-    vim.keymap.set('n', '<leader>sg', fzf.live_grep)
-    vim.keymap.set('n', '<leader>sgr', fzf.live_grep_resume)
+    vim.keymap.set('n', '<leader>sg', fzf.live_grep) -- search grep (or global)
+    vim.keymap.set('n', '<leader>sgr', fzf.live_grep_resume) -- search grep resume
     -- filenames
     vim.keymap.set('n', '<leader>sf', fzf.files)
     vim.keymap.set('n', '<leader>sb', fzf.buffers)
     -- lines in buffer(s)
-    vim.keymap.set('n', '<leader>sbl', fzf.blines)
-    vim.keymap.set('n', '<leader>sl', fzf.lines)
+    -- vim.keymap.set('n', '<leader>sbl', fzf.blines) # Pointless, just use /
+    vim.keymap.set('n', '<leader>sl', fzf.lines) -- this does what you think, look through the lines of all buffers
     -- tokens from treesitter
-    vim.keymap.set('n', '<leader>st', fzf.treesitter)
+    vim.keymap.set('n', '<leader>st', fzf.treesitter) -- current buffer only :(
     -- documentation
     vim.keymap.set('n', '<leader>sh', fzf.helptags)
     vim.keymap.set('n', '<leader>sm', fzf.manpages)
-    -- theme selector
+    -- theme selectob
     vim.keymap.set('n', '<leader>st', fzf.colorschemes)
     -- look at keymaps
     vim.keymap.set('n', '<leader>sk', fzf.keymaps)
