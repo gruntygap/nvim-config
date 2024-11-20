@@ -19,6 +19,11 @@ return {
       end
     end
     require('fzf-lua').setup({
+      winopts = {
+        preview = {
+          layout = "vertical"
+        }
+      },
       grep = {
         actions = {
           -- this action toggles between 'grep' and 'live_grep'
