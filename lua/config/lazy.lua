@@ -21,6 +21,7 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 require('config.set')
+require('config.ft')
 require('config.remap')
 
 -- Setup lazy.nvim
