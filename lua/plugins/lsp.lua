@@ -15,16 +15,12 @@ return {
       'hrsh7th/cmp-nvim-lsp',
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
-      -- Fidget
-      'j-hui/fidget.nvim',
     },
     -- init is called at startup
     init = function()
       vim.opt.signcolumn = 'yes'
     end,
     config = function()
-      -- Setup Fidget
-      require('fidget').setup({})
       local lsp_defaults = require('lspconfig').util.default_config
 
       lsp_defaults.capabilities = vim.tbl_deep_extend(
@@ -39,6 +35,7 @@ return {
       -- if there is a language server active in the file
       vim.api.nvim_create_autocmd('LspAttach', {
         desc = 'LSP actions',
+        ---@diagnostic disable-next-line: unused-local
         callback = function(client, buf)
           local opts = { buffer = buf, remap = false }
 
@@ -52,6 +49,7 @@ return {
           vim.keymap.set('n', '<leader>vca', function() vim.lsp.buf.code_action() end, opts)
           vim.keymap.set('n', '<leader>vrr', function() vim.lsp.buf.references() end, opts)
           vim.keymap.set('n', '<leader>vrn', function() vim.lsp.buf.rename() end, opts)
+          vim.keymap.set({'n','v'}, '<leader>vf', vim.lsp.buf.format, opts)
 
           vim.keymap.set('i', '<C-h>', function() vim.lsp.buf.signature_help() end, opts)
         end,
@@ -114,9 +112,12 @@ return {
     lazy = true,
     opts = {
       ensure_installed = {'ts_ls', 'eslint', 'lua_ls', 'yamlls', 'jsonls'},
+      automatic_installation = true,
       handlers = {
         function(server_name)
-          require('lspconfig')[server_name].setup({})
+          local capabilities = require('lspconfig').util.default_config.capabilities
+          -- turn off formatting in favor of efm
+          require('lspconfig')[server_name].setup({ capabilities = capabilities, settings = { format = false } })
         end,
         jsonls = function ()
           local opts = {
@@ -191,6 +192,37 @@ return {
               }
             }
           })
+        end,
+        efm = function ()
+          local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+          -- got most of this config from:
+          -- https://github.com/lukas-reineke/dotfiles/blob/master/vim/lua/efm/prettier.lua
+          local prettier = {
+            formatCommand = [[$([ -n "$(command -v node_modules/.bin/prettier)" ] && echo "node_modules/.bin/prettier" || echo "prettier") --stdin-filepath ${INPUT} ${--config-precedence:configPrecedence} ${--tab-width:tabWidth} ${--single-quote:singleQuote} ${--trailing-comma:trailingComma}]],
+            formatStdin = true
+          }
+
+          local languages = {
+            typescript = { prettier },
+            typescriptreact = { prettier },
+            javascript = { prettier }
+          }
+
+          local opts = {
+            capabilities = capabilities,
+            filetypes = vim.tbl_keys(languages),
+            settings = {
+              rootMarkers = { '.git/' },
+              languages = languages,
+            },
+            init_options = {
+              documentFormatting = true,
+              documentRangeFormatting = true,
+            },
+          }
+
+          require('lspconfig').efm.setup(opts)
         end,
       }
     }
