@@ -39,3 +39,11 @@ vim.opt.colorcolumn = '80'
 
 -- corrects weird changes when :w but you didn't change anything (EOL chars)
 vim.opt.fixeol = false
+
+-- folding code config
+vim.opt.fillchars = { fold = " " }
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldenable = false
+vim.opt.foldlevel = 99
+vim.g.markdown_folding = 1 -- enable markdown folding
