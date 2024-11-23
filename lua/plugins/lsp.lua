@@ -49,7 +49,8 @@ return {
           vim.keymap.set('n', '<leader>vca', function() vim.lsp.buf.code_action() end, opts)
           vim.keymap.set('n', '<leader>vrr', function() vim.lsp.buf.references() end, opts)
           vim.keymap.set('n', '<leader>vrn', function() vim.lsp.buf.rename() end, opts)
-          vim.keymap.set({'n','v'}, '<leader>vf', vim.lsp.buf.format, opts)
+          -- Ensure that ts_ls does not format. Stupid
+          vim.keymap.set({'n','v'}, '<leader>vf', function() vim.lsp.buf.format({ filter = function (client) return client.name ~= 'ts_ls' end }) end, opts)
 
           vim.keymap.set('i', '<C-h>', function() vim.lsp.buf.signature_help() end, opts)
         end,
@@ -115,9 +116,7 @@ return {
       automatic_installation = true,
       handlers = {
         function(server_name)
-          local capabilities = require('lspconfig').util.default_config.capabilities
-          -- turn off formatting in favor of efm
-          require('lspconfig')[server_name].setup({ capabilities = capabilities, settings = { format = false } })
+          require('lspconfig')[server_name].setup({})
         end,
         jsonls = function ()
           local opts = {
@@ -194,13 +193,11 @@ return {
           })
         end,
         efm = function ()
-          local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
           -- got most of this config from:
           -- https://github.com/lukas-reineke/dotfiles/blob/master/vim/lua/efm/prettier.lua
           local prettier = {
-            formatCommand = [[$([ -n "$(command -v node_modules/.bin/prettier)" ] && echo "node_modules/.bin/prettier" || echo "prettier") --stdin-filepath ${INPUT} ${--config-precedence:configPrecedence} ${--tab-width:tabWidth} ${--single-quote:singleQuote} ${--trailing-comma:trailingComma}]],
-            formatStdin = true
+            formatCommand = [[$([ -n "$(command -v node_modules/.bin/prettier)" ] && echo "node_modules/.bin/prettier" || echo "prettier") --stdin-filepath ${INPUT} ]],
+            formatStdin = true,
           }
 
           local languages = {
@@ -210,15 +207,13 @@ return {
           }
 
           local opts = {
-            capabilities = capabilities,
             filetypes = vim.tbl_keys(languages),
             settings = {
               rootMarkers = { '.git/' },
               languages = languages,
             },
             init_options = {
-              documentFormatting = true,
-              documentRangeFormatting = true,
+              documentFormatting = true
             },
           }
 
