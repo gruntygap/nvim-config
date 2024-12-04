@@ -7,18 +7,19 @@ return {
   },
   {
     'iamcco/markdown-preview.nvim',
+    lazy = true,
+    ft = { "markdown" },
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     config = function() vim.fn["mkdp#util#install"]() end,
   },
-  "eandrju/cellular-automaton.nvim",
   {
-    'numToStr/Comment.nvim',
-    dependencies = {
-      'JoosepAlviste/nvim-ts-context-commentstring'
-    },
-    config = function()
-      require('Comment').setup {
-        pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
-      }
-    end
+    'JoosepAlviste/nvim-ts-context-commentstring',
+    lazy = true,
+    opt = { enable_autocmd = false }
+  },
+  {
+    "eandrju/cellular-automaton.nvim",
+    cmd = { "CellularAutomaton" },
+    lazy = true
   }
 }
