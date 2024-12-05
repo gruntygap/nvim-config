@@ -9,8 +9,8 @@ return {
   {
     'neovim/nvim-lspconfig',
     lazy = true,
-    cmd = {'LspInfo', 'LspInstall', 'LspStart'},
-    event = {'BufReadPre', 'BufNewFile'},
+    cmd = { 'LspInfo', 'LspInstall', 'LspStart' },
+    event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
       'williamboman/mason.nvim',
@@ -21,16 +21,6 @@ return {
       vim.opt.signcolumn = 'yes'
     end,
     config = function()
-      local lsp_defaults = require('lspconfig').util.default_config
-
-      lsp_defaults.capabilities = vim.tbl_deep_extend(
-        'force',
-        {},
-        vim.lsp.protocol.make_client_capabilities(),
-        lsp_defaults.capabilities,
-        require('cmp_nvim_lsp').default_capabilities()
-      )
-
       -- LspAttach is where you enable features that only work
       -- if there is a language server active in the file
       vim.api.nvim_create_autocmd('LspAttach', {
@@ -50,15 +40,11 @@ return {
           vim.keymap.set('n', '<leader>vrr', function() vim.lsp.buf.references() end, opts)
           vim.keymap.set('n', '<leader>vrn', function() vim.lsp.buf.rename() end, opts)
           -- Ensure that ts_ls does not format. Stupid
-          vim.keymap.set({'n','v'}, '<leader>vf', function() vim.lsp.buf.format({ filter = function (client) return client.name ~= 'ts_ls' end }) end, opts)
+          vim.keymap.set({ 'n', 'v' }, '<leader>vf',
+            function() vim.lsp.buf.format({ filter = function(client) return client.name ~= 'ts_ls' end }) end, opts)
 
           vim.keymap.set('i', '<C-h>', function() vim.lsp.buf.signature_help() end, opts)
         end,
-      })
-      vim.diagnostic.config({
-        virtual_text = {
-          source = true
-        }
       })
     end
   },
@@ -68,7 +54,8 @@ return {
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-path',
+      -- 'hrsh7th/cmp-path',
+      -- Not sure that I need this ^
       'hrsh7th/cmp-cmdline',
       -- Snippets
       'L3MON4D3/LuaSnip',
@@ -83,10 +70,16 @@ return {
       local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
       cmp.setup({
+        formatting = {
+          format = function(entry, vim_item)
+            vim_item.menu = entry.source.name
+            return vim_item
+          end,
+        },
         sources = {
-          {name = 'buffer'}, -- cmp-buffer
-          {name = 'luasnip'}, -- cmp_luasnip
-          {name = 'nvim_lsp'},
+          { name = 'buffer' }, -- cmp-buffer
+          { name = 'nvim_lsp' },
+          { name = 'luasnip' } -- cmp_luasnip
         },
         snippet = {
           expand = function(args)
@@ -110,115 +103,132 @@ return {
   {
     'williamboman/mason-lspconfig.nvim',
     lazy = true,
-    opts = {
-      ensure_installed = {'ts_ls', 'eslint', 'lua_ls', 'yamlls', 'jsonls'},
-      automatic_installation = true,
-      handlers = {
-        function(server_name)
-          require('lspconfig')[server_name].setup({})
-        end,
-        jsonls = function ()
-          local opts = {
-            filetypes = { 'json', 'jsonc' },
-            settings = {
-              json = {
-                schemas = {
-                  {
-                    fileMatch = {"package.json"},
-                    url = "https://json.schemastore.org/package.json"
-                  },
-                  {
-                    fileMatch = {"tsconfig*.json"},
-                    url = "https://json.schemastore.org/tsconfig.json"
-                  },
-                  {
-                    fileMatch = {
-                      ".prettierrc",
-                      ".prettierrc.json",
-                      "prettier.config.json"
+    dependencies = {
+      'williamboman/mason.nvim',
+      'neovim/nvim-lspconfig',
+      'hrsh7th/nvim-cmp',
+    },
+    config = function()
+      local masonConfig = require('mason-lspconfig')
+      local capabilities = vim.tbl_deep_extend(
+        'force',
+        require('lspconfig').util.default_config.capabilities,
+        require('cmp_nvim_lsp').default_capabilities()
+      )
+      masonConfig.setup({
+        ensure_installed = { 'ts_ls', 'eslint', 'lua_ls', 'yamlls', 'jsonls' },
+        automatic_installation = true,
+        handlers = {
+          function(server_name)
+            require('lspconfig')[server_name].setup({ capabilities = capabilities })
+          end,
+          jsonls = function()
+            local opts = {
+              capabilities = capabilities,
+              filetypes = { 'json', 'jsonc' },
+              settings = {
+                json = {
+                  schemas = {
+                    {
+                      fileMatch = { "package.json" },
+                      url = "https://json.schemastore.org/package.json"
                     },
-                    url = "https://json.schemastore.org/prettierrc.json"
-                  },
-                  {
-                    fileMatch = {".eslintrc", ".eslintrc.json"},
-                    url = "https://json.schemastore.org/eslintrc.json"
-                  },
-                  {
-                    fileMatch = {".babelrc", ".babelrc.json", "babel.config.json"},
-                    url = "https://json.schemastore.org/babelrc.json"
-                  },
-                  {
-                    fileMatch = {"lerna.json"},
-                    url = "https://json.schemastore.org/lerna.json"
-                  },
-                  {
-                    fileMatch = {"now.json", "vercel.json"},
-                    url = "https://json.schemastore.org/now.json"
-                  },
-                  {
-                    fileMatch = {
-                      ".stylelintrc",
-                      ".stylelintrc.json",
-                      "stylelint.config.json"
+                    {
+                      fileMatch = { "tsconfig*.json" },
+                      url = "https://json.schemastore.org/tsconfig.json"
                     },
-                    url = "http://json.schemastore.org/stylelintrc.json"
+                    {
+                      fileMatch = {
+                        ".prettierrc",
+                        ".prettierrc.json",
+                        "prettier.config.json"
+                      },
+                      url = "https://json.schemastore.org/prettierrc.json"
+                    },
+                    {
+                      fileMatch = { ".eslintrc", ".eslintrc.json" },
+                      url = "https://json.schemastore.org/eslintrc.json"
+                    },
+                    {
+                      fileMatch = { ".babelrc", ".babelrc.json", "babel.config.json" },
+                      url = "https://json.schemastore.org/babelrc.json"
+                    },
+                    {
+                      fileMatch = { "lerna.json" },
+                      url = "https://json.schemastore.org/lerna.json"
+                    },
+                    {
+                      fileMatch = { "now.json", "vercel.json" },
+                      url = "https://json.schemastore.org/now.json"
+                    },
+                    {
+                      fileMatch = {
+                        ".stylelintrc",
+                        ".stylelintrc.json",
+                        "stylelint.config.json"
+                      },
+                      url = "http://json.schemastore.org/stylelintrc.json"
+                    }
                   }
                 }
               }
             }
-          }
-          require('lspconfig').jsonls.setup(opts)
-        end,
-        lua_ls = function()
-          local lsp_defaults = require('lspconfig').util.default_config
-          -- Ensure that nvim lsp recognizes the vim global object
-          require('lspconfig').lua_ls.setup({
-            capabilities = lsp_defaults.capabilities,
-            settings = {
-              Lua = {
-                runtime = {
-                  version = 'LuaJIT'
-                },
-                diagnostics = {
-                  globals = { 'vim' },
-                },
-                workspace = {
-                  library = {
-                    vim.env.VIMRUNTIME
+            require('lspconfig').jsonls.setup(opts)
+          end,
+          lua_ls = function()
+            -- Ensure that nvim lsp recognizes the vim global object
+            require('lspconfig').lua_ls.setup({
+              capabilities = capabilities,
+              settings = {
+                Lua = {
+                  runtime = {
+                    version = 'LuaJIT'
+                  },
+                  diagnostics = {
+                    globals = { 'vim' },
+                  },
+                  workspace = {
+                    checkThirdParty = false,
+                    library = {
+                      vim.env.VIMRUNTIME,
+                      '~/.local/share/nvim/lazy'
+                    }
                   }
                 }
               }
+            })
+          end,
+          efm = function()
+            -- got most of this config from:
+            -- https://github.com/lukas-reineke/dotfiles/blob/master/vim/lua/efm/prettier.lua
+            local prettier = {
+              formatCommand =
+              [[$([ -n "$(command -v node_modules/.bin/prettier)" ] && echo "node_modules/.bin/prettier" || echo "prettier") --stdin-filepath ${INPUT} ]],
+              formatStdin = true,
             }
-          })
-        end,
-        efm = function ()
-          -- got most of this config from:
-          -- https://github.com/lukas-reineke/dotfiles/blob/master/vim/lua/efm/prettier.lua
-          local prettier = {
-            formatCommand = [[$([ -n "$(command -v node_modules/.bin/prettier)" ] && echo "node_modules/.bin/prettier" || echo "prettier") --stdin-filepath ${INPUT} ]],
-            formatStdin = true,
-          }
 
-          local languages = {
-            typescript = { prettier },
-            typescriptreact = { prettier },
-            javascript = { prettier }
-          }
+            local languages = {
+              typescript = { prettier },
+              typescriptreact = { prettier },
+              javascript = { prettier }
+            }
 
-          local opts = {
-            filetypes = vim.tbl_keys(languages),
-            settings = {
-              rootMarkers = { '.git/' },
-              languages = languages,
-            },
-            init_options = {
-              documentFormatting = true
-            },
-          }
+            local opts = {
+              capabilities = capabilities,
+              filetypes = vim.tbl_keys(languages),
+              settings = {
+                rootMarkers = { '.git/' },
+                languages = languages,
+              },
+              init_options = {
+                documentFormatting = true
+              },
+            }
 
-          require('lspconfig').efm.setup(opts)
-        end,
-      }
-    }
+            require('lspconfig').efm.setup(opts)
+          end,
+        }
+      })
+    end
   }
 }
