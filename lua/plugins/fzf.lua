@@ -5,13 +5,13 @@ return {
   config = function()
     local actions = require('fzf-lua.actions')
     local toggled = false
-    local dotgit = function (_, opts)
+    local dotgit = function(_, opts)
       local flag = '--exclude .git'
 
       toggled = not toggled
       actions.toggle_flag(_, vim.tbl_extend("force", opts, { toggle_flag = flag }))
     end
-    local dotGitHeader = function ()
+    local dotGitHeader = function()
       if toggled then
         return "exclude .git"
       else
@@ -44,16 +44,16 @@ return {
     })
     local fzf = require('fzf-lua')
 
-    vim.keymap.set('n', '<leader>ss', fzf.grep) -- search
+    vim.keymap.set('n', '<leader>ss', fzf.grep)              -- search
     -- Live grep whole project
-    vim.keymap.set('n', '<leader>sg', fzf.live_grep) -- search grep (or global)
+    vim.keymap.set('n', '<leader>sg', fzf.live_grep)         -- search grep (or global)
     vim.keymap.set('n', '<leader>sgr', fzf.live_grep_resume) -- search grep resume
     -- filenames
     vim.keymap.set('n', '<leader>sf', fzf.files)
     vim.keymap.set('n', '<leader>sb', fzf.buffers)
     -- lines in buffer(s)
     -- vim.keymap.set('n', '<leader>sbl', fzf.blines) # Pointless, just use /
-    vim.keymap.set('n', '<leader>sl', fzf.lines) -- this does what you think, look through the lines of all buffers
+    vim.keymap.set('n', '<leader>sl', fzf.lines)      -- this does what you think, look through the lines of all buffers
     -- tokens from treesitter
     vim.keymap.set('n', '<leader>st', fzf.treesitter) -- current buffer only :(
     -- documentation

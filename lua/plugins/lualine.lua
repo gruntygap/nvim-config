@@ -9,11 +9,11 @@ return {
       if (fug_stat_line == nil or fug_stat_line == '') then
         return custom_out
       end
-      custom_out = fug_stat_line:sub(2,-2) -- trim off [] around Statusline
+      custom_out = fug_stat_line:sub(2, -2) -- trim off [] around Statusline
       if (custom_out:find(':')) then
-        custom_out = custom_out:sub(5) -- trim off Git: from front of string
+        custom_out = custom_out:sub(5)     -- trim off Git: from front of string
       else
-        custom_out = custom_out:sub(4) -- trim off Git from front of string
+        custom_out = custom_out:sub(4)     -- trim off Git from front of string
         custom_out = custom_out:sub(2, -2) -- trim off ()
       end
       return ' ' .. custom_out
