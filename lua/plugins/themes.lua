@@ -35,5 +35,10 @@ return {
   {
     "ilof2/posterpole.nvim",
     lazy = true
+  },
+  {
+    -- monokai replacement
+    "sainnhe/sonokai",
+    lazy = true
   }
 }
