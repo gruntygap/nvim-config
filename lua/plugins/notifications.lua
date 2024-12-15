@@ -1,11 +1,45 @@
 return {
   {
     "folke/snacks.nvim",
+    dependencies = {
+      -- Dep for dashboard
+      {
+        "folke/persistence.nvim",
+        lazy = true,
+        event = "BufReadPre",
+        opts = {}
+      }
+    },
     opts = {
       notifier = {
         -- your notifier configuration comes here
         -- or leave it empty to use the default settings
         -- refer to the configuration section below
+      },
+      dashboard = {
+        preset = {
+          header = [[
+
+███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
+████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
+██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║
+██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║
+██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
+╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
+
+
+          ]],
+          keys = {
+            { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+            { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+            { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
+            { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
+            { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})" },
+            { icon = " ", key = "s", desc = "Restore Session", section = "session" },
+            { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy" },
+            { icon = " ", key = "q", desc = "Quit", action = ":qa" },
+          }
+        }
       }
     },
     init = function()
@@ -16,7 +50,7 @@ return {
         callback = function(ev)
           local client = vim.lsp.get_client_by_id(ev.data.client_id)
           local value = ev.data.params
-          .value --[[@as {percentage?: number, title?: string, message?: string, kind: "begin" | "report" | "end"}]]
+              .value --[[@as {percentage?: number, title?: string, message?: string, kind: "begin" | "report" | "end"}]]
           if not client or type(value) ~= "table" then
             return
           end
@@ -54,7 +88,7 @@ return {
         end,
       })
 
-      vim.api.nvim_create_user_command('SnackHistory', function ()
+      vim.api.nvim_create_user_command('SnackHistory', function()
         Snacks.notifier.show_history()
       end, {})
     end
