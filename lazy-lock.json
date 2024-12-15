@@ -31,7 +31,7 @@
   "plenary.nvim": { "branch": "master", "commit": "2d9b06177a975543726ce5c73fca176cedbffe9d" },
   "posterpole.nvim": { "branch": "master", "commit": "66b7daf07c7c40d0154278b38436b0c1283c45d7" },
   "rose-pine": { "branch": "main", "commit": "91548dca53b36dbb9d36c10f114385f759731be1" },
-  "snacks.nvim": { "branch": "main", "commit": "b90e8c4c15a78083f8be86be271ae69a60f425d8" },
+  "snacks.nvim": { "branch": "main", "commit": "05602b6cafeb2495e2ddaae18198a439a5b5efd0" },
   "sonokai": { "branch": "master", "commit": "fd42b20963c34dfc1744ac31f6a6efe78f4edad2" },
   "trouble.nvim": { "branch": "main", "commit": "46cf952fc115f4c2b98d4e208ed1e2dce08c9bf6" },
   "undotree": { "branch": "master", "commit": "78b5241191852ffa9bb5da5ff2ee033160798c3b" },
