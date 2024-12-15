@@ -38,6 +38,7 @@ return {
           }
         }
       },
+      gitbrowse = {},
       ---@module 'snacks'
       ---@type snacks.notifier.Config
       notifier = {
@@ -105,6 +106,10 @@ return {
 
       vim.api.nvim_create_user_command('SnackHistory', function()
         Snacks.notifier.show_history()
+      end, {})
+
+      vim.api.nvim_create_user_command('GBrowse', function()
+        Snacks.gitbrowse()
       end, {})
 
       vim.api.nvim_create_user_command('Zen', function()
