@@ -21,5 +21,10 @@ return {
     "eandrju/cellular-automaton.nvim",
     cmd = { "CellularAutomaton" },
     lazy = true
+  },
+  {
+    "NvChad/nvim-colorizer.lua",
+    event = "BufReadPre",
+    opts = {}
   }
 }
