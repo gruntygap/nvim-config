@@ -50,7 +50,7 @@ return {
         toggles = {
           dim = false,
           git_signs = false,
-          mini_diff_signs = true
+          mini_diff_signs = false,
         },
         ---@type snacks.win.Config
         win = {
