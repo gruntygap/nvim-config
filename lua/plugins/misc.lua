@@ -26,5 +26,9 @@ return {
     "NvChad/nvim-colorizer.lua",
     event = "BufReadPre",
     opts = {}
+  },
+  {
+    "prichrd/netrw.nvim",
+    opts = {}
   }
 }
