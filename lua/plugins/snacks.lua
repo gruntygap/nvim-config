@@ -1,6 +1,7 @@
 return {
   {
     "folke/snacks.nvim",
+    priority = 1000,
     dependencies = {
       -- Dep for dashboard
       {
@@ -11,11 +12,6 @@ return {
       }
     },
     opts = {
-      ---@module 'snacks'
-      ---@type snacks.notifier.Config
-      notifier = {
-        style = "compact"
-      },
       dashboard = {
         preset = {
           header = [[
@@ -40,6 +36,24 @@ return {
             { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy" },
             { icon = " ", key = "q", desc = "Quit", action = ":qa" },
           }
+        }
+      },
+      ---@module 'snacks'
+      ---@type snacks.notifier.Config
+      notifier = {
+        style = "compact"
+      },
+      -- Visualize indent guides like indent-blankline
+      indent = {},
+      zen = {
+        toggles = {
+          dim = false,
+          git_signs = false,
+          mini_diff_signs = true
+        },
+        ---@type snacks.win.Config
+        win = {
+          backdrop = { transparent = false }
         }
       }
     },
@@ -91,6 +105,10 @@ return {
 
       vim.api.nvim_create_user_command('SnackHistory', function()
         Snacks.notifier.show_history()
+      end, {})
+
+      vim.api.nvim_create_user_command('Zen', function()
+        Snacks.zen()
       end, {})
     end
   }
