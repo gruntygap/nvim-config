@@ -2,15 +2,6 @@ return {
   {
     "folke/snacks.nvim",
     priority = 1000,
-    dependencies = {
-      -- Dep for dashboard
-      {
-        "folke/persistence.nvim",
-        lazy = true,
-        event = "BufReadPre",
-        opts = {}
-      }
-    },
     opts = {
       dashboard = {
         preset = {
@@ -119,7 +110,13 @@ return {
       vim.api.nvim_create_user_command('Zen', function()
         Snacks.zen()
       end, {})
-
     end
+  },
+  -- Dep for dashboard
+  {
+    "folke/persistence.nvim",
+    lazy = true,
+    event = "BufReadPre",
+    opts = {}
   }
 }
