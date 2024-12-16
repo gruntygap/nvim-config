@@ -1,7 +1,6 @@
 return {
   {
     'nvim-lualine/lualine.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons', opt = true },
     config = function()
       -- Just a weird status line object that takes the mediocre line from fugitive, and makes it nicer to look at.
       function Custom_fugitive_status()
@@ -20,7 +19,7 @@ return {
         return ' ' .. custom_out
       end
 
-      require('lualine').setup {
+      require('lualine').setup({
         options = {
           component_separators = '',
           section_separators = { left = '', right = '' },
@@ -68,7 +67,11 @@ return {
         },
         tabline = {},
         extensions = {},
-      }
+      })
     end
+  },
+  {
+    'nvim-tree/nvim-web-devicons',
+    lazy = true
   }
 }
