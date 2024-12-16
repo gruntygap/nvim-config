@@ -1,8 +1,9 @@
 vim.opt.guicursor = ''
 
 -- Buffer shiz
-vim.opt.bufhidden = 'hide'
+-- vim.opt.bufhidden = 'hide'
 
+-- number lines
 vim.opt.nu = true
 vim.opt.relativenumber = true
 

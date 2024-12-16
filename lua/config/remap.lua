@@ -5,8 +5,10 @@ vim.keymap.set('v', '<leader>y', '\"+y')
 vim.keymap.set('n', '<leader>Y', '\"+Y')
 
 -- Windows/Buffers
-vim.keymap.set('n', '<leader>q', vim.cmd.bdelete, { silent = true }) -- close window, buffer deleted
-vim.keymap.set('n', '<leader>w', vim.cmd.close, { silent = true }) -- close window, buffer remains
+-- vim.keymap.set('n', '<leader>q', vim.cmd.bdelete, { silent = true }) -- close window, buffer deleted
+-- vim.keymap.set('n', '<leader>w', vim.cmd.close, { silent = true }) -- close window, buffer remains
+vim.keymap.set('n', '<leader>q', vim.cmd.bdelete, { }) -- close window, buffer deleted
+vim.keymap.set('n', '<leader>w', vim.cmd.close, { }) -- close window, buffer remains
 
 -- Tabpages
 vim.keymap.set('n', '<leader>tn', vim.cmd.tabnew) -- new tab

@@ -1,7 +1,11 @@
+-- opts/settings
 require('config.set')
-require('config.remap')
 
+-- lazy plugin manager
 require('config.lazy')
 
--- Load after lazy, as there are `require` statements
+-- Remapping/Keymapping
+require('config.remap')
+
+-- !! Load after lazy, as there are `require` statements
 require('config.filetype')
