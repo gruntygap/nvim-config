@@ -1,6 +1,9 @@
 return {
   {
     'nvim-lualine/lualine.nvim',
+    init = function ()
+      vim.opt.showmode = false
+    end,
     config = function()
       -- Just a weird status line object that takes the mediocre line from fugitive, and makes it nicer to look at.
       function Custom_fugitive_status()

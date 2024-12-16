@@ -8,7 +8,7 @@
   "dracula.nvim": { "branch": "main", "commit": "e6128ec3923b92bb2b16e81b4a0f04ed0308038e" },
   "everforest": { "branch": "master", "commit": "44c2659ffb6d26a994346974b4d12e988f43e5e5" },
   "friendly-snippets": { "branch": "main", "commit": "efff286dd74c22f731cdec26a70b46e5b203c619" },
-  "fzf-lua": { "branch": "main", "commit": "1511da02661654caeb1bca9a1871e2b7731f5836" },
+  "fzf-lua": { "branch": "main", "commit": "86faa5a23e7158c2f49941591c0889c3746389da" },
   "gitsigns.nvim": { "branch": "main", "commit": "5f808b5e4fef30bd8aca1b803b4e555da07fc412" },
   "gruvbox-material": { "branch": "master", "commit": "b704a8f8d93e3cf3a86969f22d368d46b482d8ee" },
   "gruvbox.nvim": { "branch": "main", "commit": "68c3460a5d1d1a362318960035c9f3466d5011f5" },
