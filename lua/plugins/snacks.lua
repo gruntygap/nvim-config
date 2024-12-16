@@ -104,17 +104,22 @@ return {
         end,
       })
 
-      vim.api.nvim_create_user_command('SnackHistory', function()
-        Snacks.notifier.show_history()
+      vim.api.nvim_create_user_command('dashboard', function()
+        Snacks.dashboard()
       end, {})
 
       vim.api.nvim_create_user_command('GBrowse', function()
         Snacks.gitbrowse()
       end, {})
 
+      vim.api.nvim_create_user_command('SnackHistory', function()
+        Snacks.notifier.show_history()
+      end, {})
+
       vim.api.nvim_create_user_command('Zen', function()
         Snacks.zen()
       end, {})
+
     end
   }
 }
