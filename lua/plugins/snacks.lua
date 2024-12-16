@@ -104,7 +104,7 @@ return {
         end,
       })
 
-      vim.api.nvim_create_user_command('dashboard', function()
+      vim.api.nvim_create_user_command('Dashboard', function()
         Snacks.dashboard()
       end, {})
 
