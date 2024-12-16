@@ -28,7 +28,7 @@ return {
           keys = {
             { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
             { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
-            { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
+            { icon = " ", key = "a", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
             { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
             -- Config action modified to change the directory to the config directory for ease of searching.
             { icon = " ", key = "c", desc = "Config", action = ":lua vim.cmd(string.format('tcd %s', vim.fn.stdpath('config'))) Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})" },
