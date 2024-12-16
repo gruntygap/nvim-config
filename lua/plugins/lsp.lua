@@ -11,11 +11,6 @@ return {
     lazy = true,
     cmd = { 'LspInfo', 'LspInstall', 'LspStart' },
     event = { 'BufReadPre', 'BufNewFile' },
-    dependencies = {
-      'hrsh7th/cmp-nvim-lsp',
-      'williamboman/mason.nvim',
-      'williamboman/mason-lspconfig.nvim',
-    },
     -- init is called at startup
     init = function()
       vim.opt.signcolumn = 'yes'
@@ -80,10 +75,10 @@ return {
               -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
               -- can also be a function to dynamically calculate max width such as
               -- menu = function() return math.floor(0.45 * vim.o.columns) end,
-              menu = 50,        -- leading text (labelDetails)
-              abbr = 50,        -- actual suggestion item
+              menu = 50,              -- leading text (labelDetails)
+              abbr = 50,              -- actual suggestion item
             },
-            ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+            ellipsis_char = '...',    -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
             show_labelDetails = true, -- show labelDetails in menu. Disabled by default
 
             -- The function below will be called before any actual modifications from lspkind
@@ -121,13 +116,10 @@ return {
   {
     'williamboman/mason-lspconfig.nvim',
     lazy = true,
-    dependencies = {
-      'williamboman/mason.nvim',
-      'neovim/nvim-lspconfig',
-      'hrsh7th/nvim-cmp',
-    },
+    event = { 'BufReadPre', 'BufNewFile' },
     config = function()
       local masonConfig = require('mason-lspconfig')
+
       local capabilities = vim.tbl_deep_extend(
         'force',
         require('lspconfig').util.default_config.capabilities,
