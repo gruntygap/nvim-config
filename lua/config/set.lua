@@ -1,5 +1,3 @@
-vim.g.mapleader = ' '
-
 vim.opt.guicursor = ''
 
 -- Buffer shiz
@@ -47,3 +45,9 @@ vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldenable = false
 vim.opt.foldlevel = 99
 vim.g.markdown_folding = 1 -- enable markdown folding
+
+-- netrw settings
+vim.g.netrw_browse_split = 0
+vim.g.netrw_banner = 0
+vim.g.netrw_winsize = 25
+

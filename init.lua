@@ -1,5 +1,7 @@
+require('config.set')
+require('config.remap')
+
 require('config.lazy')
 
-require('config.set')
-require('config.ft')
-require('config.remap')
+-- Load after lazy, as there are `require` statements
+require('config.filetype')

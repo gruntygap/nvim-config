@@ -1,7 +1,3 @@
--- native vim binding remapper
--- Typically will not include plugin bindings, look to /after for those
-vim.g.mapleader = ' ';
-
 vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
 
 vim.keymap.set('n', '<leader>y', '\"+y')
@@ -14,12 +10,8 @@ vim.keymap.set('n', '<leader>w', vim.cmd.close, { silent = true }) -- close wind
 
 -- Tabpages
 vim.keymap.set('n', '<leader>tn', vim.cmd.tabnew) -- new tab
+
+--  Use `:tc(d) {path}` to change directories within vim tabs
+--  not very helpful, use gt and gT
 -- vim.keymap.set('n', '<C-S-PageDown>', vim.cmd.tabprevious, { silent = true }) -- previous tab
 -- vim.keymap.set('n', '<C-S-PageUp>', vim.cmd.tabnext, { silent = true }) -- next tab
---  not very helpful, use gt and gT
---  Use `:tc(d) {path}` to change directories within vim tabs
-
-vim.g.netrw_browse_split = 0
-vim.g.netrw_banner = 0
-vim.g.netrw_winsize = 25
-
