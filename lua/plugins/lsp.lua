@@ -221,7 +221,8 @@ return {
               typescript = { prettier },
               typescriptreact = { prettier },
               javascript = { prettier },
-              json = { prettier }
+              json = { prettier },
+              jsonc = { prettier }
             }
 
             local opts = {
