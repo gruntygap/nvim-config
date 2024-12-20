@@ -36,7 +36,7 @@ return {
           vim.keymap.set('n', '<leader>vrn', function() vim.lsp.buf.rename() end, opts)
           -- Ensure that ts_ls does not format. Stupid
           vim.keymap.set({ 'n', 'v' }, '<leader>vf',
-            function() vim.lsp.buf.format({ filter = function(client) return client.name ~= 'ts_ls' end }) end, opts)
+            function() vim.lsp.buf.format({ filter = function(client) return (client.name ~= 'ts_ls' and client.name ~= 'jsonls') end }) end, opts)
 
           vim.keymap.set('i', '<C-h>', function() vim.lsp.buf.signature_help() end, opts)
         end,
@@ -220,7 +220,8 @@ return {
             local languages = {
               typescript = { prettier },
               typescriptreact = { prettier },
-              javascript = { prettier }
+              javascript = { prettier },
+              json = { prettier }
             }
 
             local opts = {

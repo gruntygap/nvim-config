@@ -99,7 +99,7 @@ return {
         Snacks.dashboard()
       end, {})
 
-      vim.api.nvim_create_user_command('GBrowse', function()
+      vim.api.nvim_create_user_command('GitBrowse', function()
         Snacks.gitbrowse()
       end, {})
 
