@@ -33,7 +33,8 @@ return {
       ---@module 'snacks'
       ---@type snacks.notifier.Config
       notifier = {
-        style = "compact"
+        style = "compact",
+        padding = false,
       },
       -- Visualize indent guides like indent-blankline
       indent = {},
