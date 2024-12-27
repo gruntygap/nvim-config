@@ -23,7 +23,7 @@ return {
     lazy = true
   },
   {
-    "NvChad/nvim-colorizer.lua",
+    "catgoose/nvim-colorizer.lua",
     event = "BufReadPre",
     opts = {}
   },
