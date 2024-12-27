@@ -2,6 +2,7 @@ return {
   {
     'nvim-lualine/lualine.nvim',
     init = function ()
+      -- RM default last line 'Insert', 'Replace', 'Visual'
       vim.opt.showmode = false
     end,
     config = function()

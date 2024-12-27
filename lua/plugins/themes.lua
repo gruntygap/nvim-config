@@ -19,7 +19,7 @@ return {
   {
     'sainnhe/everforest',
     lazy = true
-   },
+  },
   {
     "catppuccin/nvim",
     name = "catppuccin",
@@ -40,5 +40,10 @@ return {
     -- monokai replacement
     "sainnhe/sonokai",
     lazy = true
+  },
+  {
+    "folke/tokyonight.nvim",
+    name = 'tokyonight',
+    lazy = true,
   }
 }
