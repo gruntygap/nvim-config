@@ -3,6 +3,18 @@ return {
     "folke/snacks.nvim",
     priority = 1000,
     opts = {
+      bigfile = {
+        notify = true,
+        size = 10 * 1024 * 1024,
+        setup = function(ctx)
+          vim.cmd([[NoMatchParen]])
+          Snacks.util.wo(0, { foldmethod = "manual", statuscolumn = "", conceallevel = 0 })
+          vim.b.minianimate_disable = true
+          vim.schedule(function()
+            vim.bo[ctx.buf].syntax = ctx.ft
+          end)
+        end
+      },
       dashboard = {
         preset = {
           header = [[
