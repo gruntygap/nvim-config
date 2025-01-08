@@ -1,5 +1,14 @@
 return {
   {
+    "navarasu/onedark.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function ()
+      require('onedark').setup({ style = 'darker' })
+      require('onedark').load()
+    end
+  },
+  {
     "ellisonleao/gruvbox.nvim",
     lazy = true
   },
@@ -28,9 +37,7 @@ return {
   {
     'f4z3r/gruvbox-material.nvim',
     name = 'gruvbox-material',
-    lazy = false,
-    priority = 1000,
-    opts = {},
+    lazy = true,
   },
   {
     "ilof2/posterpole.nvim",
