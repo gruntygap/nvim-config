@@ -74,6 +74,7 @@ return {
       })
     end
   },
+  -- Needs this, also in fzf.lua
   {
     'nvim-tree/nvim-web-devicons',
     lazy = true
