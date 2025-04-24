@@ -90,8 +90,8 @@ return {
           })
         },
         sources = {
-          { name = 'buffer' }, -- cmp-buffer
           { name = 'nvim_lsp' },
+          { name = 'buffer' }, -- cmp-buffer
           { name = 'luasnip' } -- cmp_luasnip
         },
         snippet = {
