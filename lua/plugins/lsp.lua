@@ -10,37 +10,21 @@ return {
       vim.opt.signcolumn = 'yes'
     end,
     config = function()
-      local lspconfig = require("lspconfig")
       local mason_lspconfig = require("mason-lspconfig")
-
-      -- local lsp_files = {}
-      -- local lsp_dir = vim.fn.stdpath("config") .. "/lsp/"
-      --
+      -- https://github.com/edr3x/nvim/blob/main/lua/r3x/lsp.lua
       -- local configs = {}
       -- local config_keys = {}
-
-      -- https://github.com/edr3x/nvim/blob/main/lua/r3x/lsp.lua
       -- for _, file in ipairs(vim.fn.globpath(lsp_dir, "*.lua", false, true)) do
       -- for _, v in ipairs(vim.api.nvim_get_runtime_file("lsp/*", true)) do
       --   local name = vim.fn.fnamemodify(v, ":t:r") -- `:t` gets filename, `:r` removes extension
       --   configs[name] = true
       --   table.insert(lsp_files, name)
       -- end
-
       -- config_keys = vim.tbl_keys(configs)
 
 
       for _, server in ipairs(mason_lspconfig.get_installed_servers()) do
-        -- local config = {}
-        --
-        -- if custom_configs[server] then
-        --   for k, v in pairs(custom_configs[server]) do
-        --     -- Shallow merge into config from custom_configs
-        --     config[k] = v
-        --   end
-        -- end
-
-        -- vim.lsp.enable(server)
+        vim.lsp.enable(server)
       end
 
       -- LspAttach is where you enable features that only work
@@ -205,7 +189,7 @@ return {
     event = { 'BufReadPre', 'BufNewFile' },
     opts = {
       ensure_installed = { 'ts_ls', 'eslint', 'lua_ls', 'yamlls', 'jsonls' },
-      automatic_enable = true
+      automatic_enable = false
     }
   }
 }
