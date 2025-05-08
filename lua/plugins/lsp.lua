@@ -13,124 +13,34 @@ return {
       local lspconfig = require("lspconfig")
       local mason_lspconfig = require("mason-lspconfig")
 
-      local custom_configs = {
-        efm = (function()
-          -- got most of this config from:
-          -- https://github.com/lukas-reineke/dotfiles/blob/master/vim/lua/efm/prettier.lua
-          local prettier = {
-            formatCommand =
-            [[$([ -n "$(command -v node_modules/.bin/prettier)" ] && echo "node_modules/.bin/prettier" || echo "prettier") --stdin-filepath ${INPUT} ]],
-            formatStdin = true,
-          }
+      -- local lsp_files = {}
+      -- local lsp_dir = vim.fn.stdpath("config") .. "/lsp/"
+      --
+      -- local configs = {}
+      -- local config_keys = {}
 
-          local languages = {
-            typescript = { prettier },
-            typescriptreact = { prettier },
-            javascript = { prettier },
-            json = { prettier },
-            jsonc = { prettier }
-          }
+      -- https://github.com/edr3x/nvim/blob/main/lua/r3x/lsp.lua
+      -- for _, file in ipairs(vim.fn.globpath(lsp_dir, "*.lua", false, true)) do
+      -- for _, v in ipairs(vim.api.nvim_get_runtime_file("lsp/*", true)) do
+      --   local name = vim.fn.fnamemodify(v, ":t:r") -- `:t` gets filename, `:r` removes extension
+      --   configs[name] = true
+      --   table.insert(lsp_files, name)
+      -- end
 
-          local opts = {
-            filetypes = vim.tbl_keys(languages),
-            settings = {
-              rootMarkers = { '.git/' },
-              languages = languages,
-            },
-            init_options = {
-              documentFormatting = true
-            },
-          }
+      -- config_keys = vim.tbl_keys(configs)
 
-          return opts
-        end)(),
-        jsonls = {
-          filetypes = { 'json', 'jsonc' },
-          settings = {
-            json = {
-              schemas = {
-                {
-                  fileMatch = { "package.json" },
-                  url = "https://json.schemastore.org/package.json"
-                },
-                {
-                  fileMatch = { "tsconfig*.json" },
-                  url = "https://json.schemastore.org/tsconfig.json"
-                },
-                {
-                  fileMatch = {
-                    ".prettierrc",
-                    ".prettierrc.json",
-                    "prettier.config.json"
-                  },
-                  url = "https://json.schemastore.org/prettierrc.json"
-                },
-                {
-                  fileMatch = { ".eslintrc", ".eslintrc.json" },
-                  url = "https://json.schemastore.org/eslintrc.json"
-                },
-                {
-                  fileMatch = { ".babelrc", ".babelrc.json", "babel.config.json" },
-                  url = "https://json.schemastore.org/babelrc.json"
-                },
-                {
-                  fileMatch = { "lerna.json" },
-                  url = "https://json.schemastore.org/lerna.json"
-                },
-                {
-                  fileMatch = { "now.json", "vercel.json" },
-                  url = "https://json.schemastore.org/now.json"
-                },
-                {
-                  fileMatch = {
-                    ".stylelintrc",
-                    ".stylelintrc.json",
-                    "stylelint.config.json"
-                  },
-                  url = "http://json.schemastore.org/stylelintrc.json"
-                }
-              }
-            }
-          }
-        },
-        lua_ls = {
-          settings = {
-            Lua = {
-              runtime = {
-                version = 'LuaJIT'
-              },
-              diagnostics = {
-                globals = { 'vim' },
-              },
-              workspace = {
-                checkThirdParty = false,
-                library = {
-                  vim.env.VIMRUNTIME,
-                  '~/.local/share/nvim/lazy'
-                }
-              }
-            },
-          },
-        }
-      }
-
-      -- local capabilities = vim.tbl_deep_extend(
-      --   'force',
-      --   require('lspconfig').util.default_config.capabilities,
-      --   require('cmp_nvim_lsp').default_capabilities()
-      -- )
 
       for _, server in ipairs(mason_lspconfig.get_installed_servers()) do
-        local config = {}
+        -- local config = {}
+        --
+        -- if custom_configs[server] then
+        --   for k, v in pairs(custom_configs[server]) do
+        --     -- Shallow merge into config from custom_configs
+        --     config[k] = v
+        --   end
+        -- end
 
-        if custom_configs[server] then
-          for k, v in pairs(custom_configs[server]) do
-            -- Shallow merge into config from custom_configs
-            config[k] = v
-          end
-        end
-
-        lspconfig[server].setup(config)
+        -- vim.lsp.enable(server)
       end
 
       -- LspAttach is where you enable features that only work
@@ -205,7 +115,7 @@ return {
       sources = {
         default = { 'lsp', 'buffer', 'path', 'snippets' },
       },
-
+      signature = { enabled = true },
       -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
       -- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
       -- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
@@ -270,7 +180,7 @@ return {
   --           require('luasnip').lsp_expand(args.body)
   --         end,
   --       },
-  --       mapping = cmp.mapping.preset.insert({
+  --       mapping = cmp.maping.preset.insert({
   --         ['<C-f>'] = cmp.mapping.scroll_docs(4),
   --         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
   --         ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
@@ -295,7 +205,7 @@ return {
     event = { 'BufReadPre', 'BufNewFile' },
     opts = {
       ensure_installed = { 'ts_ls', 'eslint', 'lua_ls', 'yamlls', 'jsonls' },
-      automatic_enable = false
+      automatic_enable = true
     }
   }
 }
