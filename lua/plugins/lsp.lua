@@ -1,4 +1,19 @@
 return {
+  -- LSP Server Management Application
+  {
+    'mason-org/mason.nvim',
+    lazy = false,
+    opts = {}
+  },
+  {
+    'mason-org/mason-lspconfig.nvim',
+    lazy = true,
+    event = { 'BufReadPre', 'BufNewFile' },
+    opts = {
+      ensure_installed = { 'ts_ls', 'eslint', 'lua_ls', 'yamlls', 'jsonls' },
+      automatic_enable = true,
+    }
+  },
   -- LSP
   {
     'neovim/nvim-lspconfig',
@@ -10,22 +25,10 @@ return {
       vim.opt.signcolumn = 'yes'
     end,
     config = function()
-      local mason_lspconfig = require("mason-lspconfig")
-      -- https://github.com/edr3x/nvim/blob/main/lua/r3x/lsp.lua
-      -- local configs = {}
-      -- local config_keys = {}
-      -- for _, file in ipairs(vim.fn.globpath(lsp_dir, "*.lua", false, true)) do
-      -- for _, v in ipairs(vim.api.nvim_get_runtime_file("lsp/*", true)) do
-      --   local name = vim.fn.fnamemodify(v, ":t:r") -- `:t` gets filename, `:r` removes extension
-      --   configs[name] = true
-      --   table.insert(lsp_files, name)
+      -- local mason_lspconfig = require("mason-lspconfig")
+      -- for _, server in ipairs(mason_lspconfig.get_installed_servers()) do
+      --   vim.lsp.enable(server)
       -- end
-      -- config_keys = vim.tbl_keys(configs)
-
-
-      for _, server in ipairs(mason_lspconfig.get_installed_servers()) do
-        vim.lsp.enable(server)
-      end
 
       -- LspAttach is where you enable features that only work
       -- if there is a language server active in the file
@@ -108,7 +111,7 @@ return {
       fuzzy = { implementation = "prefer_rust_with_warning" }
     },
     opts_extend = { "sources.default" }
-  },
+  }
   -- {
   --   'hrsh7th/nvim-cmp',
   --   dependencies = {
@@ -177,19 +180,4 @@ return {
   --     require('luasnip.loaders.from_vscode').lazy_load()
   --   end
   -- },
-  -- LSP Server Management Application
-  {
-    'mason-org/mason.nvim',
-    lazy = false,
-    opts = {}
-  },
-  {
-    'mason-org/mason-lspconfig.nvim',
-    lazy = true,
-    event = { 'BufReadPre', 'BufNewFile' },
-    opts = {
-      ensure_installed = { 'ts_ls', 'eslint', 'lua_ls', 'yamlls', 'jsonls' },
-      automatic_enable = false
-    }
-  }
 }
