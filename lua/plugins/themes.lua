@@ -1,17 +1,21 @@
 return {
   {
     "navarasu/onedark.nvim",
-    lazy = false,
+    lazy = true,
     priority = 1000,
-    config = function ()
-      require('onedark').setup({ style = 'darker' })
-      require('onedark').load()
-    end
+    -- config = function ()
+    --   require('onedark').setup({ style = 'darker' })
+    --   require('onedark').load()
+    -- end
   },
   {
     "rose-pine/neovim",
     name = 'rose-pine',
-    lazy = true
+    lazy = false,
+    priority = 1000,
+    config = function ()
+      vim.cmd('colorscheme rose-pine')
+    end
   },
   {
     "Mofiqul/dracula.nvim",

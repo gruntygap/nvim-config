@@ -1,15 +1,18 @@
 -- got most of this config from:
 -- https://github.com/lukas-reineke/dotfiles/blob/master/vim/lua/efm/prettier.lua
 local prettier = {
-  formatCommand =
-  [[$([ -n "$(command -v node_modules/.bin/prettier)" ] && echo "node_modules/.bin/prettier" || echo "prettier") --stdin-filepath ${INPUT} ]],
+  formatCommand = "yarn prettier --stdin-filepath ${INPUT}",
   formatStdin = true,
+  -- Stopped working at some point? [[$([ -n "$(command -v node_modules/.bin/prettier)" ] && echo "node_modules/.bin/prettier" || echo "prettier") --stdin-filepath ${INPUT} ]],
 }
 
 local languages = {
   typescript = { prettier },
   typescriptreact = { prettier },
+  ["typescript.tsx"] = { prettier },
   javascript = { prettier },
+  javascriptreact = { prettier },
+  ["javascript.jsx"] = { prettier },
   json = { prettier },
   jsonc = { prettier }
 }
