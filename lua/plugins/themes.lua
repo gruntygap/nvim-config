@@ -1,13 +1,13 @@
 return {
-  {
-    "navarasu/onedark.nvim",
-    lazy = true,
-    priority = 1000,
-    -- config = function ()
-    --   require('onedark').setup({ style = 'darker' })
-    --   require('onedark').load()
-    -- end
-  },
+  -- {
+  --   "navarasu/onedark.nvim",
+  --   lazy = true,
+  --   priority = 1000,
+  --   -- config = function ()
+  --   --   require('onedark').setup({ style = 'darker' })
+  --   --   require('onedark').load()
+  --   -- end
+  -- },
   {
     "rose-pine/neovim",
     name = 'rose-pine',
@@ -17,15 +17,15 @@ return {
       vim.cmd('colorscheme rose-pine')
     end
   },
-  {
-    "Mofiqul/dracula.nvim",
-    lazy = true
-  },
-  {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    lazy = true
-  },
+  -- {
+  --   "Mofiqul/dracula.nvim",
+  --   lazy = true
+  -- },
+  -- {
+  --   "catppuccin/nvim",
+  --   name = "catppuccin",
+  --   lazy = true
+  -- },
   -- Sad themes that look like a buick
   ------------------------------------
   -- {
@@ -45,14 +45,14 @@ return {
   --   'franbach/miramare',
   --   lazy = true
   -- },
-  {
-    -- monokai replacement
-    "sainnhe/sonokai",
-    lazy = true
-  },
-  {
-    "folke/tokyonight.nvim",
-    name = 'tokyonight',
-    lazy = true,
-  }
+  -- {
+  --   -- monokai replacement
+  --   "sainnhe/sonokai",
+  --   lazy = true
+  -- },
+  -- {
+  --   "folke/tokyonight.nvim",
+  --   name = 'tokyonight',
+  --   lazy = true,
+  -- }
 }

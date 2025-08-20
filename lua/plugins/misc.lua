@@ -17,11 +17,11 @@ return {
     lazy = true,
     opt = { enable_autocmd = false }
   },
-  {
-    "eandrju/cellular-automaton.nvim",
-    cmd = { "CellularAutomaton" },
-    lazy = true
-  },
+  -- {
+  --   "eandrju/cellular-automaton.nvim",
+  --   cmd = { "CellularAutomaton" },
+  --   lazy = true
+  -- },
   {
     "catgoose/nvim-colorizer.lua",
     event = "BufReadPre",
