@@ -1,7 +1,6 @@
 return {
   {
     "ibhagwan/fzf-lua",
-    commit = "d6e899e",
     config = function()
       local actions = require('fzf-lua.actions')
       local toggled = false

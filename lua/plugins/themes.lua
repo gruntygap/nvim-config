@@ -11,21 +11,26 @@ return {
   {
     "rose-pine/neovim",
     name = 'rose-pine',
-    lazy = false,
-    priority = 1000,
-    config = function ()
-      vim.cmd('colorscheme rose-pine')
-    end
+    lazy = true
+    -- priority = 1000,
+    -- config = function ()
+    --   vim.cmd('colorscheme rose-pine')
+    -- end
   },
   -- {
   --   "Mofiqul/dracula.nvim",
   --   lazy = true
   -- },
-  -- {
-  --   "catppuccin/nvim",
-  --   name = "catppuccin",
-  --   lazy = true
-  -- },
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    lazy = false,
+    priority = 1000,
+    config = function ()
+      require('catppuccin').setup({ default_integrations = true })
+      vim.cmd('colorscheme catppuccin')
+    end
+  },
   -- Sad themes that look like a buick
   ------------------------------------
   -- {
