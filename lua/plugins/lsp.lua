@@ -10,7 +10,7 @@ return {
     lazy = true,
     event = { 'BufReadPre', 'BufNewFile' },
     opts = {
-      ensure_installed = { 'ts_ls', 'eslint', 'lua_ls', 'yamlls', 'jsonls' },
+      ensure_installed = { 'tsgo', 'eslint', 'lua_ls', 'yamlls', 'jsonls' },
       automatic_enable = true,
     }
   },
@@ -46,7 +46,7 @@ return {
           vim.keymap.set('n', '<leader>vrn', function() vim.lsp.buf.rename() end, opts)
           -- Ensure that ts_ls does not format. Stupid
           vim.keymap.set({ 'n', 'v' }, '<leader>vf',
-            function() vim.lsp.buf.format({ filter = function(client) return (client.name ~= 'ts_ls' and client.name ~= 'jsonls') end }) end,
+            function() vim.lsp.buf.format({ filter = function(client) return (client.name ~= 'tsgo' and client.name ~= 'jsonls') end }) end,
             opts)
 
           vim.keymap.set('i', '<C-h>', function() vim.lsp.buf.signature_help() end, opts)

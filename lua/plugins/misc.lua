@@ -1,5 +1,10 @@
 return {
   {
+    'h3pei/copy-file-path.nvim',
+    config = function()
+    end
+  },
+  {
     'mbbill/undotree',
     config = function()
       vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
