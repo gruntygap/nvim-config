@@ -9,10 +9,8 @@ local prettier = {
 local languages = {
   typescript = { prettier },
   typescriptreact = { prettier },
-  ["typescript.tsx"] = { prettier },
   javascript = { prettier },
   javascriptreact = { prettier },
-  ["javascript.jsx"] = { prettier },
   json = { prettier },
   jsonc = { prettier }
 }
