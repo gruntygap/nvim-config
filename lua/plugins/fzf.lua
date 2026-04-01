@@ -1,6 +1,21 @@
 return {
   {
     "ibhagwan/fzf-lua",
+    keys = {
+      { "<leader>ss", function() require('fzf-lua').grep() end, desc = "Search" },
+      { "<leader>sg", function() require('fzf-lua').live_grep() end, desc = "Search grep" },
+      { "<leader>sgg", function() require('fzf-lua').live_grep_glob() end, desc = "Search grep glob" },
+      { "<leader>sgr", function() require('fzf-lua').live_grep_resume() end, desc = "Search grep resume" },
+      { "<leader>sf", function() require('fzf-lua').files() end, desc = "Search files" },
+      { "<leader>sb", function() require('fzf-lua').buffers() end, desc = "Search buffers" },
+      { "<leader>sl", function() require('fzf-lua').lines() end, desc = "Search lines" },
+      { "<leader>str", function() require('fzf-lua').treesitter() end, desc = "Search treesitter" },
+      { "<leader>sh", function() require('fzf-lua').helptags() end, desc = "Search help" },
+      { "<leader>sm", function() require('fzf-lua').manpages() end, desc = "Search manpages" },
+      { "<leader>st", function() require('fzf-lua').colorschemes() end, desc = "Search themes" },
+      { "<leader>sk", function() require('fzf-lua').keymaps() end, desc = "Search keymaps" },
+      { "<leader>shh", function() require('fzf-lua').search_history() end, desc = "Search history" },
+    },
     config = function()
       local actions = require('fzf-lua.actions')
       local toggled = false
@@ -49,29 +64,6 @@ return {
           }
         }
       })
-      -- setup keymaps
-      vim.keymap.set('n', '<leader>ss', fzf.grep)              -- search
-      -- Live grep whole project
-      vim.keymap.set('n', '<leader>sg', fzf.live_grep)         -- search grep (or global)
-      vim.keymap.set('n', '<leader>sgg', fzf.live_grep_glob)   -- search grep (or global)
-      vim.keymap.set('n', '<leader>sgr', fzf.live_grep_resume) -- search grep resume
-      -- filenames
-      vim.keymap.set('n', '<leader>sf', fzf.files)
-      vim.keymap.set('n', '<leader>sb', fzf.buffers)
-      -- lines in buffer(s)
-      -- vim.keymap.set('n', '<leader>sbl', fzf.blines) # Pointless, just use /
-      vim.keymap.set('n', '<leader>sl', fzf.lines)       -- this does what you think, look through the lines of all buffers
-      -- tokens from treesitter
-      vim.keymap.set('n', '<leader>str', fzf.treesitter) -- current buffer only :(
-      -- documentation
-      vim.keymap.set('n', '<leader>sh', fzf.helptags)
-      vim.keymap.set('n', '<leader>sm', fzf.manpages)
-      -- theme selectob
-      vim.keymap.set('n', '<leader>st', fzf.colorschemes)
-      -- look at keymaps
-      vim.keymap.set('n', '<leader>sk', fzf.keymaps)
-      -- history of search
-      vim.keymap.set('n', '<leader>shh', fzf.search_history)
     end
   },
   {

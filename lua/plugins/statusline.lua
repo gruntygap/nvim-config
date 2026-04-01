@@ -1,6 +1,7 @@
 return {
   {
     'nvim-lualine/lualine.nvim',
+    event = "VeryLazy",
     init = function ()
       -- RM default last line 'Insert', 'Replace', 'Visual'
       vim.opt.showmode = false

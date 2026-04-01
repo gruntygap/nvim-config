@@ -1,14 +1,13 @@
 return {
   {
     'h3pei/copy-file-path.nvim',
+    event = "VeryLazy",
     config = function()
     end
   },
   {
     'mbbill/undotree',
-    config = function()
-      vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
-    end
+    keys = { { '<leader>u', vim.cmd.UndotreeToggle, desc = "Toggle undotree" } },
   },
   {
     'iamcco/markdown-preview.nvim',
@@ -34,6 +33,7 @@ return {
   },
   {
     "prichrd/netrw.nvim",
+    event = "VeryLazy",
     opts = {}
   },
   {
