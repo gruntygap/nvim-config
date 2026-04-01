@@ -44,6 +44,7 @@ return {
       gitbrowse = {},
       ---@module 'snacks'
       ---@type snacks.notifier.Config
+      ---Instead of fidget.nvim
       notifier = {
         style = "compact",
         padding = false,
