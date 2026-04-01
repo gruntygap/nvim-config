@@ -7,7 +7,7 @@ return {
 
       -- function to toggle exclusion of .git
       local dotgit = function(_, opts)
-        local flag = '--exclude .git'
+        local flag = '--ignore-exclude .git'
 
         toggled = not toggled
         actions.toggle_flag(_, vim.tbl_extend("force", opts, { toggle_flag = flag }))
@@ -41,6 +41,7 @@ return {
           }
         },
         files = {
+          -- cmd = "rg --files --color=never",
           actions = {
             ["ctrl-g"] = { actions.toggle_ignore },
             ["ctrl-t"] = { fn = dotgit, header = dotGitHeader },
